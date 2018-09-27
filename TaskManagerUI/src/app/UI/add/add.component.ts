@@ -49,6 +49,7 @@ export class AddComponent implements OnInit {
   AddTask() {
     this.obj = new Task();
     var error = false;
+    debugger;
     if (this.Task) {
       this.obj.Task = this.Task;
       this.showTaskReqError = false;

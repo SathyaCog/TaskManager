@@ -45,3 +45,8 @@ TaskManagerService/TaskManagerService/obj/Debug/TemporaryGeneratedFile_E7A71F73-
 /TaskManagerService/Task.UnitTests/obj/Debug
 /TaskManagerService/Task.UnitTests/bin/Debug
 /TaskManagerService/TaskManagerService/obj/Debug
+/.vs
+/TaskManagerService/Task.DataAccessLayer/obj/Release
+/TaskManagerService/Task.UnitTests/obj/Release
+/TaskManagerService/TaskManagerService/obj/Release
+/TaskManagerService/Task.BusinessLayer/obj/Release/CoreCompileInputs.cache
