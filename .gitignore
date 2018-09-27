@@ -37,3 +37,11 @@ TaskManagerService/TaskManagerService/obj/Debug/TaskManagerService.csprojResolve
 TaskManagerService/TaskManagerService/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
 TaskManagerService/TaskManagerService/obj/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
 TaskManagerService/TaskManagerService/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+/TaskManagerService/TaskManagerService/bin
+/TaskManagerService/Task.BusinessLayer/obj/Debug
+/TaskManagerService/Task.BusinessLayer/bin/Debug
+/TaskManagerService/Task.DataAccessLayer/obj/Debug
+/TaskManagerService/Task.DataAccessLayer/bin/Debug
+/TaskManagerService/Task.UnitTests/obj/Debug
+/TaskManagerService/Task.UnitTests/bin/Debug
+/TaskManagerService/TaskManagerService/obj/Debug
