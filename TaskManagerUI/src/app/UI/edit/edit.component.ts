@@ -32,11 +32,11 @@ export class EditComponent implements OnInit {
       this.taskId = +params["id"];
     });
     this.GetTaskById(this.taskId);
-    this.GetParentTasks();
+    this.GetParentTasks(this.taskId);
   }
 
-  GetParentTasks() {
-    this._taskService.GetParentTasks()
+  GetParentTasks(taskId) {
+    this._taskService.GetParentTasks(taskId)
       .subscribe(res => {
         this.ParentTaskList = res;
       });

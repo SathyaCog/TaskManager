@@ -29,13 +29,14 @@ namespace Task.BusinessLayer
             }
         }
 
-        public Collection<string> GetParentTasks()
+        public Collection<string> GetParentTasks(int? taskId)
         {
             using (var taskManager = new TaskManagerEntities())
             {
                 Collection<string> taskCollection = new Collection<string>();
 
                 taskManager.tblTasks
+                    .Where(x => (taskId == null) || (x.TaskID != taskId))
                    .Select(t => t.Task).ToList()
                    .ForEach(y => taskCollection.Add(y));
 

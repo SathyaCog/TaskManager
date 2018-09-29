@@ -43,12 +43,12 @@ namespace TaskManagerService.Controllers
         }
 
         [HttpGet]
-        [Route("GetParentTasks")]
-        public IHttpActionResult GetParentTasks()
+        [Route("GetParentTasks/{taskId}")]
+        public IHttpActionResult GetParentTasks(int? taskId)
         {
             Collection<string> tasks = new Collection<string>();
 
-            var blTasks = taskManagerBL.GetParentTasks();
+            var blTasks = taskManagerBL.GetParentTasks(taskId);
             blTasks.ToList().ForEach(x => tasks.Add(x));
 
             return Ok(tasks);

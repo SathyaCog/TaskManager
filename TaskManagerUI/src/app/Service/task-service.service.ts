@@ -27,8 +27,8 @@ export class TaskServiceService {
       .catch(error => Observable.throw(error))
   }
 
-  GetParentTasks(): Observable<string[]> {
-    return this._http.get(this.getParentTaskUrl)
+  GetParentTasks(taskId): Observable<string[]> {
+    return this._http.get(this.getParentTaskUrl + '/' + taskId)
       .map(response => { return response.json() })
       .catch(error => Observable.throw(error))
   }

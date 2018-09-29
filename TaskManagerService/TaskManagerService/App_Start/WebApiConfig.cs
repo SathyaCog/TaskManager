@@ -11,7 +11,7 @@ namespace TaskManagerService
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            var corsAttr = new EnableCorsAttribute("http://localhost:4200", "*", "*");
+            var corsAttr = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(corsAttr);
 
             // Web API routes

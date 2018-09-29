@@ -1,15 +1,8 @@
-<h1>Task Manager</h1>
-<div class="row">
-    <div class="col-xs-12">
-        <ul class="nav nav-pills">
-            <li>
-                <a [routerLink]="'/add'" style="color:black;">Add Task</a>
-            </li>
-
-            <li>
-                <a [routerLink]="'/view'">View Task</a>
-            </li>
-        </ul>
-    </div>
+<div class="container BottomMargin">
+    <h1>Task Manager</h1>
+    <nav>
+        <a [routerLink]="'/add'">Add Task</a> |
+        <a [routerLink]="'/view'">View Task</a>
+    </nav>
 </div>
 <router-outlet></router-outlet>

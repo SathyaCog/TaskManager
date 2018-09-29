@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AddComponent implements OnInit {
   Task: string;
+  TaskId: number;
   Priority: number;
   ParentTask: string;
   StartDate: Date;
@@ -32,7 +33,8 @@ export class AddComponent implements OnInit {
   }
 
   GetParentTasks() {
-    this._taskService.GetParentTasks()
+    debugger;
+    this._taskService.GetParentTasks(this.TaskId)
       .subscribe(res => {
         this.ParentTaskList = res;
       });
@@ -49,7 +51,6 @@ export class AddComponent implements OnInit {
   AddTask() {
     this.obj = new Task();
     var error = false;
-    debugger;
     if (this.Task) {
       this.obj.Task = this.Task;
       this.showTaskReqError = false;

@@ -32,7 +32,7 @@ namespace Task.UnitTests
         public void GetParentTasksTest_Success()
         {
             var taskController = new TaskController();
-            var response = taskController.GetParentTasks();
+            var response = taskController.GetParentTasks(null);
             var responseResult = response as OkNegotiatedContentResult<Collection<string>>;
             Assert.IsNotNull(responseResult);
             Assert.IsNotNull(responseResult.Content);

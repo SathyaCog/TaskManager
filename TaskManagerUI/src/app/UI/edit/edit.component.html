@@ -1,19 +1,21 @@
-<form class="form-horizontal">
+<form class="container form-horizontal">
+  <h4 class="BottomMargin">Update Task</h4>
   <div class="form-group">
-    <label for="txtTask" class="col-xs-2 control-label">Task:</label>
+    <label for="txtTask" class="col-xs-2">Task:</label>
     <div class="col-xs-4">
       <input type="text" id="txtTask" name="txtTask" [(ngModel)]="Task" required class="form-control">
       <div [hidden]="!showTaskReqError" class="alert-danger"> Task Name is required! </div>
     </div>
   </div>
   <div class="form-group">
-    <label for="ranPriority" class="col-xs-2 control-label">Priority:</label>
+    <label for="ranPriority" class="col-xs-2">Priority:</label>
     <div class="col-xs-4">
-      <input type="range" class="slider" id="ranPriority" [(ngModel)]="Priority" required min="0" max="30" step="5">
+      <input type="range" class="slider" id="ranPriority" name="ranPriority" [(ngModel)]="Priority" required min="0"
+        max="30" step="5">
     </div>
   </div>
   <div class="form-group">
-    <label for="txtParentTask" class="col-xs-2 control-label">Parent Task:</label>
+    <label for="txtParentTask" class="col-xs-2">Parent Task:</label>
     <div class="col-xs-4">
       <select id="txtParentTask" name="txtParentTask" [(ngModel)]="ParentTask" class="form-control">
         <option *ngFor="let c of ParentTaskList" [ngValue]="c">{{c}}</option>
@@ -21,7 +23,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="txtSDate" class="col-xs-2 control-label">Start Date:</label>
+    <label for="txtSDate" class="col-xs-2">Start Date:</label>
     <div class="col-xs-4">
       <input type="date" id="txtSDate" name="txtSDate" [min]="minDate" [ngModel]="StartDate | date:'yyyy-MM-dd'"
         (ngModelChange)="StartDate = $event" required class="form-control">
@@ -29,7 +31,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="txtEDate" class="col-xs-2 control-label">End Date:</label>
+    <label for="txtEDate" class="col-xs-2">End Date:</label>
     <div class="col-xs-4">
       <input type="date" id="txtEDate" name="txtEDate" [min]="minDate" [ngModel]="EndDate | date:'yyyy-MM-dd'"
         (ngModelChange)="EndDate = $event" required class="form-control">
@@ -38,7 +40,7 @@
   </div>
 
   <div class="form-group">
-    <label class="col-xs-2 control-label"></label>
+    <label class="col-xs-2"></label>
     <div class="col-xs-4">
       <button class="btn btn-default" (click)='UpdateTask()'>Update</button>
       <button class="btn btn-default" [routerLink]="['/view']" style="margin-left: 5px;">Cancel</button>

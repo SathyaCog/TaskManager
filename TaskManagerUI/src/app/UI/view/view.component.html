@@ -1,35 +1,36 @@
 <form class="form-horizontal">
   <div class="container">
+    <h4 class="BottomMargin">Search Task</h4>
     <div class="row viewHead">
-      <label class="col-xs-2 control-label">Task:</label>
+      <label class="col-xs-2">Task:</label>
       <div class="col-xs-4">
-        <input type="text" [(ngModel)]="Task" (input)="filterItem()" class="form-control">
+        <input type="text" name="txtTask" [(ngModel)]="Task" (input)="filterItem()" class="form-control">
       </div>
-      <label class="col-xs-2 control-label">Parent Task:</label>
+      <label class="col-xs-2">Parent Task:</label>
       <div class="col-xs-4">
-        <input type="text" [(ngModel)]="ParentTask" (input)="filterItem()" class="form-control">
+        <input type="text" name="txtPTask" [(ngModel)]="ParentTask" (input)="filterItem()" class="form-control">
       </div>
     </div>
 
     <div class="row viewHead">
-      <label class="col-xs-2 control-label">Priority From:</label>
+      <label class="col-xs-2">Priority From:</label>
       <div class="col-xs-4">
-        <input type="text" [(ngModel)]="PriorityFrom" (input)="filterItem()" class="form-control">
+        <input type="text" name="txtPrFrom" [(ngModel)]="PriorityFrom" (input)="filterItem()" class="form-control">
       </div>
-      <label class="col-xs-2 control-label">Priority To:</label>
+      <label class="col-xs-2">Priority To:</label>
       <div class="col-xs-4">
-        <input type="text" [(ngModel)]="PriorityTo" (input)="filterItem()" class="form-control">
+        <input type="text" name="txtPrTo" [(ngModel)]="PriorityTo" (input)="filterItem()" class="form-control">
       </div>
     </div>
 
     <div class="row viewHead">
-      <label class="col-xs-2 control-label">Start Date:</label>
+      <label class="col-xs-2">Start Date:</label>
       <div class="col-xs-4">
-        <input type="date" [(ngModel)]="StartDate" (input)="filterItem()" class="form-control">
+        <input type="date" name="dtStDate" [(ngModel)]="StartDate" (input)="filterItem()" class="form-control">
       </div>
-      <label class="col-xs-2 control-label">End Date:</label>
+      <label class="col-xs-2">End Date:</label>
       <div class="col-xs-4">
-        <input type="date" [(ngModel)]="EndDate" (input)="filterItem()" class="form-control">
+        <input type="date" name="dtEndDate" [(ngModel)]="EndDate" (input)="filterItem()" class="form-control">
       </div>
     </div>
   </div>
