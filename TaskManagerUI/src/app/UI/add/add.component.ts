@@ -23,7 +23,6 @@ export class AddComponent implements OnInit {
   minDate: string;
 
   constructor(private _taskService: TaskServiceService, private router: Router) {
-    debugger;
     this.Priority = 0;
     this.minDate = new Date().toISOString().split('T')[0];
   }
@@ -33,7 +32,6 @@ export class AddComponent implements OnInit {
   }
 
   GetParentTasks() {
-    debugger;
     this._taskService.GetParentTasks(this.TaskId)
       .subscribe(res => {
         this.ParentTaskList = res;

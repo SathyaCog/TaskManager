@@ -17,11 +17,6 @@ export class TaskServiceService {
   endTaskUrl: string = "http://localhost/TaskManagerService/api/Task/EndTask";
 
   GetTask(): Observable<Task[]> {
-    // let headers = new Headers({
-    //   "Access-Control-Allow-Origin": "*",
-    //   "Access-Control-Allow-Headers": "Content-Type", "Access-Control-Allow-Methods": "GET"
-    // });
-    // let options = new RequestOptions({ headers: headers });
     return this._http.get(this.getUrl)
       .map(response => { return response.json() })
       .catch(error => Observable.throw(error))
@@ -54,9 +49,6 @@ export class TaskServiceService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.post(this.updateUrl, body, options)
-      .map(response => {
-        return response.json()
-      })
       .catch(error => Observable.throw(error));
   }
 

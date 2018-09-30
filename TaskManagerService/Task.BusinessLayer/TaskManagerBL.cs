@@ -5,114 +5,129 @@ using Task.DataAccessLayer;
 
 namespace Task.BusinessLayer
 {
-    public class TaskManagerBL
+    public class TaskManagerBL : ITaskManagerBL
     {
-        public Collection<TaskBL> GetTask()
+        private readonly TaskManagerEntities _taskManager;
+
+        public TaskManagerBL()
         {
-            using (var taskManager = new TaskManagerEntities())
-            {
-                Collection<TaskBL> taskCollection = new Collection<TaskBL>();
-                taskManager.tblTasks
-                   .Select(t => new TaskBL()
-                   {
-                       TaskID = t.TaskID,
-                       Task = t.Task,
-                       ParentTask = t.ParentTask,
-                       Priority = t.Priority,
-                       StartDate = t.StartDate,
-                       EndDate = t.EndDate,
-                       IsActive = t.IsActive
-                   })
-                   .ToList()
-                   .ForEach(y => taskCollection.Add(y));
-                return taskCollection;
-            }
+            _taskManager = new TaskManagerEntities();
         }
 
-        public Collection<string> GetParentTasks(int? taskId)
+        public TaskManagerBL(TaskManagerEntities taskManager)
         {
-            using (var taskManager = new TaskManagerEntities())
-            {
-                Collection<string> taskCollection = new Collection<string>();
+            _taskManager = taskManager;
+        }
 
-                taskManager.tblTasks
+        public Collection<TaskBL> GetTask()
+        {
+
+            Collection<TaskBL> taskCollection = new Collection<TaskBL>();
+            _taskManager.tblTasks
+               .Select(t => new TaskBL()
+               {
+                   TaskID = t.TaskID,
+                   Task = t.Task,
+                   ParentTask = t.ParentTask,
+                   Priority = t.Priority,
+                   StartDate = t.StartDate,
+                   EndDate = t.EndDate,
+                   IsActive = t.IsActive
+               })
+               .ToList()
+               .ForEach(y => taskCollection.Add(y));
+            return taskCollection;
+        }
+
+        public Collection<string> GetParentTasks(int? taskId = null)
+        {
+
+            Collection<string> taskCollection = new Collection<string>();
+
+            _taskManager.tblTasks
                     .Where(x => (taskId == null) || (x.TaskID != taskId))
                    .Select(t => t.Task).ToList()
                    .ForEach(y => taskCollection.Add(y));
 
-                return taskCollection;
-            }
+            return taskCollection;
+
         }
 
         public TaskBL GetTaskById(int taskId)
         {
-            using (var taskManager = new TaskManagerEntities())
-            {
-                TaskBL task = new TaskBL();
-                task = taskManager.tblTasks
-                    .Where(x => x.TaskID == taskId)
-                    .Select(t => new TaskBL()
-                    {
-                        TaskID = t.TaskID,
-                        Task = t.Task,
-                        ParentTask = t.ParentTask,
-                        Priority = t.Priority,
-                        StartDate = t.StartDate,
-                        EndDate = t.EndDate,
-                        IsActive = t.IsActive
-                    }).FirstOrDefault();
 
-                return task;
-            }
-        }
-        public void AddTask(TaskBL task)
-        {
-            using (var taskManager = new TaskManagerEntities())
-            {
-                tblTask tTask = new tblTask
+            TaskBL task = new TaskBL();
+            task = _taskManager.tblTasks
+                .Where(x => x.TaskID == taskId)
+                .Select(t => new TaskBL()
                 {
-                    Task = task.Task,
-                    ParentTask = task.ParentTask,
-                    Priority = task.Priority,
-                    StartDate = task.StartDate,
-                    EndDate = task.EndDate,
-                    IsActive = true
-                };
+                    TaskID = t.TaskID,
+                    Task = t.Task,
+                    ParentTask = t.ParentTask,
+                    Priority = t.Priority,
+                    StartDate = t.StartDate,
+                    EndDate = t.EndDate,
+                    IsActive = t.IsActive
+                }).FirstOrDefault();
 
-                taskManager.tblTasks.Add(tTask);
-                taskManager.SaveChanges();
-            }
+            return task;
+
         }
 
-        public void UpdateTask(TaskBL task)
+        public int AddTask(TaskBL task)
         {
-            using (var taskManager = new TaskManagerEntities())
+            tblTask tTask = new tblTask
             {
-                var tTask = taskManager.tblTasks.Where(t => t.TaskID == task.TaskID).FirstOrDefault();
-                if (tTask != null)
-                {
-                    tTask.ParentTask = task.ParentTask;
-                    tTask.Priority = task.Priority;
-                    tTask.StartDate = task.StartDate;
-                    tTask.EndDate = task.EndDate;
-                    taskManager.SaveChanges();
-                }
-            }
+                Task = task.Task,
+                ParentTask = task.ParentTask,
+                Priority = task.Priority,
+                StartDate = task.StartDate,
+                EndDate = task.EndDate,
+                IsActive = true
+            };
+
+            _taskManager.tblTasks.Add(tTask);
+            int result = _taskManager.SaveChanges();
+            return result;
         }
 
-        public void EndTask(int taskId)
+        public int UpdateTask(TaskBL task)
         {
-            using (var taskManager = new TaskManagerEntities())
+            int result = -1;
+            var tTask = _taskManager.tblTasks.Where(t => t.TaskID == task.TaskID).FirstOrDefault();
+            if (tTask != null)
             {
-                var task = taskManager.tblTasks.Where(t => t.TaskID == taskId).FirstOrDefault();
-                if (task != null)
-                {
-                    task.EndDate = DateTime.Now;
-                    task.IsActive = false;
-                    taskManager.SaveChanges();
-                }
+                tTask.ParentTask = task.ParentTask;
+                tTask.Priority = task.Priority;
+                tTask.StartDate = task.StartDate;
+                tTask.EndDate = task.EndDate;
+                result = _taskManager.SaveChanges();
             }
+            return result;
         }
+
+        public int EndTask(int taskId)
+        {
+            int result = -1;
+            var task = _taskManager.tblTasks.Where(t => t.TaskID == taskId).FirstOrDefault();
+            if (task != null)
+            {
+                task.EndDate = DateTime.Now;
+                task.IsActive = false;
+                result = _taskManager.SaveChanges();
+            }
+            return result;
+        }
+    }
+
+    public interface ITaskManagerBL
+    {
+        Collection<TaskBL> GetTask();
+        Collection<string> GetParentTasks(int? taskId);
+        TaskBL GetTaskById(int taskId);
+        int AddTask(TaskBL task);
+        int UpdateTask(TaskBL task);
+        int EndTask(int taskId);
     }
 
     public class TaskBL

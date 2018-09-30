@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Task.BusinessLayer;
 using TaskManagerService.Models;
@@ -12,10 +10,16 @@ namespace TaskManagerService.Controllers
     [RoutePrefix("api/Task")]
     public class TaskController : ApiController
     {
-        private TaskManagerBL taskManagerBL = null;
+        private readonly ITaskManagerBL _taskManagerBL = null;
+
         public TaskController()
         {
-            taskManagerBL = new TaskManagerBL();
+            _taskManagerBL = new TaskManagerBL();
+        }
+
+        public TaskController(ITaskManagerBL taskBL)
+        {
+            _taskManagerBL = taskBL;
         }
 
         [HttpGet]
@@ -24,7 +28,7 @@ namespace TaskManagerService.Controllers
         {
             Collection<TaskModel> tasks = new Collection<TaskModel>();
 
-            var blTasks = taskManagerBL.GetTask();
+            var blTasks = _taskManagerBL.GetTask();
             blTasks.ToList().ForEach(
                x => tasks.Add(
                    new TaskModel
@@ -44,11 +48,11 @@ namespace TaskManagerService.Controllers
 
         [HttpGet]
         [Route("GetParentTasks/{taskId}")]
-        public IHttpActionResult GetParentTasks(int? taskId)
+        public IHttpActionResult GetParentTasks(int? taskId = null)
         {
             Collection<string> tasks = new Collection<string>();
 
-            var blTasks = taskManagerBL.GetParentTasks(taskId);
+            var blTasks = _taskManagerBL.GetParentTasks(taskId);
             blTasks.ToList().ForEach(x => tasks.Add(x));
 
             return Ok(tasks);
@@ -61,7 +65,7 @@ namespace TaskManagerService.Controllers
         {
             TaskModel task = new TaskModel();
 
-            var blTasks = taskManagerBL.GetTaskById(taskId);
+            var blTasks = _taskManagerBL.GetTaskById(taskId);
             if (blTasks != null)
             {
                 task = new TaskModel
@@ -93,7 +97,7 @@ namespace TaskManagerService.Controllers
                     StartDate = task.StartDate,
                     EndDate = task.EndDate
                 };
-                taskManagerBL.AddTask(blTask);
+                int result = _taskManagerBL.AddTask(blTask);
                 return Ok();
             }
             catch (Exception)
@@ -117,7 +121,7 @@ namespace TaskManagerService.Controllers
                     EndDate = task.EndDate
                 };
 
-                taskManagerBL.UpdateTask(blTask);
+                int result = _taskManagerBL.UpdateTask(blTask);
                 return Ok();
             }
             catch (Exception)
@@ -130,7 +134,7 @@ namespace TaskManagerService.Controllers
         [Route("EndTask")]
         public IHttpActionResult EndTask([FromBody]int taskId)
         {
-            taskManagerBL.EndTask(taskId);
+            int result = _taskManagerBL.EndTask(taskId);
             return Ok();
         }
     }

@@ -18,7 +18,6 @@
     <label for="txtParentTask" class="col-xs-2">Parent Task:</label>
     <div class="col-xs-4">
       <select id="txtParentTask" name="txtParentTask" [(ngModel)]="ParentTask" class="form-control">
-        <option selected>--Select--</option>
         <option *ngFor="let c of ParentTaskList" [ngValue]="c">{{c}}</option>
       </select>
     </div>
