@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../Models/task'
 import { TaskServiceService } from '../../Service/task-service.service'
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -20,9 +19,10 @@ export class AddComponent implements OnInit {
   showTaskReqError: boolean;
   showStDateReqError: boolean;
   showEndDateReqError: boolean;
+  addSuccess: boolean;
   minDate: string;
 
-  constructor(private _taskService: TaskServiceService, private router: Router) {
+  constructor(private _taskService: TaskServiceService) {
     this.Priority = 0;
     this.minDate = new Date().toISOString().split('T')[0];
   }
@@ -79,10 +79,16 @@ export class AddComponent implements OnInit {
       this._taskService.AddTask(this.obj)
         .subscribe((data: any) => {
           console.log(data);
-          this.router.navigate(['/view']);
+          this.addSuccess = true;
+          this.Task = undefined;
+          this.ParentTask = undefined;
+          this.Priority = 0;
+          this.StartDate = undefined;
+          this.EndDate = undefined;
         },
           function (error) {
             console.log(error);
+            this.addSuccess = false;
           },
           function () {
             console.log('patyu');

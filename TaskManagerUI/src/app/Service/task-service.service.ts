@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http'
+import { Http, HttpModule, Response, Headers, RequestOptions } from '@angular/http'
 import 'rxjs/Rx'
 import { Observable } from 'rxjs'
-import { error } from 'util';
 import { Task } from '../Models/task'
 
 @Injectable()
@@ -15,6 +14,15 @@ export class TaskServiceService {
   getUrl: string = "http://localhost/TaskManagerService/api/Task/GetTasks";
   getParentTaskUrl: string = "http://localhost/TaskManagerService/api/Task/GetParentTasks";
   endTaskUrl: string = "http://localhost/TaskManagerService/api/Task/EndTask";
+  sharedTaskID: number;
+
+  changesharedTaskID(newTaskId: number) {
+    this.sharedTaskID = newTaskId;
+  }
+
+  getsharedTaskID() {
+    return this.sharedTaskID;
+  }
 
   GetTask(): Observable<Task[]> {
     return this._http.get(this.getUrl)

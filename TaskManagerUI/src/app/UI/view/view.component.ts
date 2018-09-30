@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../Models/task';
-import { appRoutes } from '../../app.routes';
 import { TaskServiceService } from '../../Service/task-service.service'
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view',
@@ -19,7 +17,7 @@ export class ViewComponent implements OnInit {
   list: Task[];
   filteredList: Task[];
 
-  constructor(private _taskService: TaskServiceService, private router: Router) { }
+  constructor(private _taskService: TaskServiceService) { }
 
   ngOnInit() {
     this.GetTask();

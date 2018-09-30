@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../Models/task'
 import { TaskServiceService } from '../../Service/task-service.service'
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -17,18 +17,18 @@ export class EditComponent implements OnInit {
   taskId: number;
   obj: Task;
   ParentTaskList: string[];
-  private sub: any;
   showTaskReqError: boolean;
   showStDateReqError: boolean;
   showEndDateReqError: boolean;
+  updateSuccess: boolean;
   minDate: string;
 
-  constructor(private _taskService: TaskServiceService, private route: ActivatedRoute, private router: Router) {
+  constructor(private _taskService: TaskServiceService, private route: ActivatedRoute) {
     this.minDate = new Date().toISOString().split('T')[0];
   }
 
   ngOnInit() {
-    this.sub = this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       this.taskId = +params["id"];
     });
     this.GetTaskById(this.taskId);
@@ -90,10 +90,11 @@ export class EditComponent implements OnInit {
       this._taskService.UpdateTask(this.obj)
         .subscribe((data: any) => {
           console.log(data);
-          this.router.navigate(['/view']);
+          this.updateSuccess = true;
         },
           function (error) {
             console.log(error);
+            this.updateSuccess = false;
           },
           function () {
             console.log('patyu');

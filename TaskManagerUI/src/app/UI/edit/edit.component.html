@@ -1,5 +1,6 @@
 <form class="container form-horizontal">
   <h4 class="BottomMargin">Update Task</h4>
+  <h6 [hidden]="!updateSuccess" style="color:green;">Task updated successfully.</h6>
   <div class="form-group">
     <label for="txtTask" class="col-xs-2">Task:</label>
     <div class="col-xs-4">

@@ -1,5 +1,6 @@
 <form class="container form-horizontal">
   <h4 class="BottomMargin">Add Task</h4>
+  <h6 [hidden]="!addSuccess" style="color:green;">Task added successfully.</h6>
   <div class="form-group">
     <label for="txtTask" class="col-xs-2">Task:</label>
     <div class="col-xs-4">
