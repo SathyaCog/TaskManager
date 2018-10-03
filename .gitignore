@@ -52,3 +52,8 @@ TaskManagerService/TaskManagerService/obj/Debug/TemporaryGeneratedFile_E7A71F73-
 /TaskManagerService/Task.BusinessLayer/obj/Release/CoreCompileInputs.cache
 /TaskManagerService/Task.NUnitTest/obj/Debug
 /TaskManagerService/Task.NUnitTest/bin/Debug
+/TaskManagerService/Task.NUnitTest/coverage
+/TaskManagerService/TestResults/8600e7fe-faef-4f7f-b8d5-bdde234c70a7
+*.bat
+/TaskManagerService/Task.NUnitTest/TestResult.xml
+/TaskManagerService/Task.NUnitTest/results.xml
